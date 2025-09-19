@@ -29,6 +29,7 @@ class _AuthScreenState extends State<AuthScreen> {
               password: _entredPass,
             );
         if (userCredentials.user != null) {
+          if (!mounted) return;
           Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (context) => ChatScreen()));
@@ -40,12 +41,14 @@ class _AuthScreenState extends State<AuthScreen> {
               password: _entredPass,
             );
         if (userCredentials.user != null) {
+          if (!mounted) return;
           Navigator.of(
             context,
           ).push(MaterialPageRoute(builder: (context) => ChatScreen()));
         }
       }
     } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
